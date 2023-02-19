@@ -1,0 +1,23 @@
+---
+import { clsx } from '../services/classname.service'
+
+interface Props {
+    heading: string
+    id: string
+    headingClass?: string
+    class?: string
+}
+const { id, heading, class: wrapperClass, headingClass } = Astro.props
+---
+
+<section id={id} class={clsx('my-28 scroll-mt-4', wrapperClass)}>
+    <div class={clsx('flex items-center flex-col gap-4 contained')}>
+        <h2 class={clsx('text-center text-primary-500', headingClass)}>
+            {heading}
+        </h2>
+        <p class="text-lg opacity-70 text-center">
+            <slot name="intro" />
+        </p>
+        <div class="mt-2 w-full"><slot /></div>
+    </div>
+</section>

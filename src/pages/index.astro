@@ -1,81 +1,153 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Layout from '../layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+import SingleDog from '../components/SingleDog.astro'
+import ContentSection from '../components/ContentSection.astro'
+import SingleProblem from '../components/SingleProblem.astro'
+import { clsx } from '../services/classname.service'
+import SingleSolution from '../components/SingleSolution.astro'
+import { Image } from '@astrojs/image/components'
+import Icon from 'astro-icon'
+
+const dogs = (await getCollection('dogs')).sort((a, b) => {
+    return +a.data.hasOwner - +b.data.hasOwner
+})
+const problems = (await getCollection('problems')).sort((a, b) => {
+    return +a.data.order - +b.data.order
+})
+const solutions = await getCollection('solutions')
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
-		<p class="instructions">
-			To get started, open the directory <code>src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-		</p>
-		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://docs.astro.build/"
-				title="Documentation"
-				body="Learn how Astro works and explore the official API docs."
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Integrations"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-			<Card
-				href="https://astro.build/themes/"
-				title="Themes"
-				body="Explore a galaxy of community-built starter themes."
-			/>
-			<Card
-				href="https://astro.build/chat/"
-				title="Community"
-				body="Come say hi to our amazing Discord community. ❤️"
-			/>
-		</ul>
-	</main>
+<Layout
+    title="Hunde in Utjeha"
+    description="In Utjeha gibt es viele herrenlose Hunde, auf die diese Seite aufmerksam machen möchte."
+>
+    <main
+        class="py-44 bg-[linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)),url(/images/hero.png)] bg-cover bg-center"
+    >
+        <div class="contained space-y-3 text-neutral-50">
+            <h1>Willkommen in Utjeha!</h1>
+            <p class="text-xl sm:text-2xl">
+                Hier gibt es viele herrenlose Hunde, auf die diese Seite
+                aufmerksam machen möchte.
+            </p>
+            <a class="btn" href="#dogs">Lerne uns kennen</a>
+        </div>
+    </main>
+    <ContentSection heading="Das sind wir" id="dogs">
+        <Fragment slot="intro">
+            Wir lieben Menschen, Futter und Zuneigung
+        </Fragment>
+        <div class="grid lg:grid-cols-2 gap-4">
+            {
+                dogs.map((dog) => {
+                    return <SingleDog dog={dog} />
+                })
+            }
+        </div>
+    </ContentSection>
+    <ContentSection
+        heading="Wir sind in Gefahr"
+        headingClass="text-red-500"
+        id="problem"
+    >
+        <Fragment slot="intro">
+            Wir haben große Angst vor den Tierfängern hier in Montenegro. Hier
+            ist das Problem:
+        </Fragment>
+        <div class="flex flex-col gap-7 relative py-14">
+            <div
+                class={clsx(
+                    'absolute left-1/2 -translate-x-0.5 inset-y-0 bg-gradient-to-b w-1 -z-10 from-red-300 to-red-600',
+                    'after:w-4 after:h-4 after:bg-red-600 after:block after:absolute after:-bottom-1 after:rounded-full after:-translate-x-1.5'
+                )}
+            >
+            </div>
+            {
+                problems.map((problem) => {
+                    return <SingleProblem problem={problem} />
+                })
+            }
+        </div>
+    </ContentSection>
+    <ContentSection
+        heading="So kannst du helfen"
+        headingClass="text-green-500"
+        id="solution"
+    >
+        <Fragment slot="intro">
+            Danke, dass du uns dabei hilfst, am Leben zu bleiben
+        </Fragment>
+        <div class="grid lg:grid-cols-2 gap-4">
+            {
+                solutions.map((solution) => {
+                    return <SingleSolution solution={solution} />
+                })
+            }
+        </div>
+    </ContentSection>
+    <ContentSection
+        heading="Noch Fragen?"
+        id="contact"
+        class="pb-24 my-0 bg-gradient-to-b from-neutral-50 via-fuchsia-50 to-fuchsia-200"
+    >
+        <Fragment slot="intro">
+            Du kannst jederzeit mit uns Kontakt aufnehmen!
+        </Fragment>
+        <div class="flex gap-2 justify-center flex-wrap">
+            <a
+                class="btn"
+                href="https://utjeha.me/ueber-uns/kontakt.html"
+                target="_blank">Allgemeine Frage</a
+            >
+            <a
+                class="btn bg-gradient-to-r from-fuchsia-500 to-purple-500"
+                href="https://wa.me/38268135250"
+                target="_blank">Ich möchte einen Hund adoptieren</a
+            >
+        </div>
+    </ContentSection>
+    <div class="relative">
+        <section class="snap-x flex overflow-auto">
+            {
+                Array.from({ length: 8 }, (_, i) => i + 1).map((file) => (
+                    <div class="snap-start flex-shrink-0">
+                        {/* @ts-ignore */}
+                        <Image
+                            src={`/images/diashow/${file}.png?v=1`}
+                            width={250}
+                            aspectRatio={3024 / 4032}
+                            alt=""
+                        />
+                    </div>
+                ))
+            }
+        </section>
+        <footer
+            class="flex gap-1 absolute bottom-2 right-2 items-center justify-center px-3 py-1 bg-primary-50 rounded-2xl"
+        >
+            Made with <Icon name="mdi:heart" class="w-4 text-red-500" /> by
+            <a href="https://borispoehland.com/contact" target="_blank"
+                >Boris Pöhland</a
+            >
+        </footer>
+    </div>
 </Layout>
 
-<style>
-	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 60ch;
-	}
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
-	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		border: 1px solid rgba(var(--accent), 25%);
-		background-color: white;
-		padding: 1rem;
-		border-radius: 0.4rem;
-	}
-	.instructions code {
-		font-size: 0.875em;
-		font-weight: bold;
-		background: rgba(var(--accent), 12%);
-		color: rgb(var(--accent));
-		border-radius: 4px;
-		padding: 0.3em 0.45em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
-</style>
+<script is:inline>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            const { isIntersecting, target } = entry
+            if (isIntersecting) {
+                target.classList.remove('fade-in')
+            } else {
+                target.classList.add('duration-700')
+            }
+        })
+    })
+    document.querySelectorAll('.fade-in').forEach((el) => {
+        if (el) {
+            observer.observe(el)
+        }
+    })
+</script>

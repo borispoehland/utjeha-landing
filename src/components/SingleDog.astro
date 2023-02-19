@@ -1,0 +1,74 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { clsx } from '../services/classname.service'
+import { Image } from '@astrojs/image/components'
+
+interface Props {
+    dog: CollectionEntry<'dogs'>
+}
+const { dog } = Astro.props
+const { data, slug, render } = dog
+const { Content } = await render()
+---
+
+<article
+    class={clsx(
+        'rounded-2xl p-4 border shadow group fade-in',
+        data.isFemale
+            ? 'bg-fuchsia-100 text-fuchsia-900 border-fuchsia-400'
+            : 'bg-blue-100 text-blue-900 border-blue-400'
+    )}
+>
+    <div
+        class="flex flex-col gap-2 sm:flex-row sm:justify-between items-center"
+    >
+        <div class="w-full">
+            <div class="flex gap-2 items-center">
+                <h3>
+                    {data.name}
+                </h3>
+                <div
+                    class={clsx(
+                        'px-3 py-1 rounded-2xl relative',
+                        data.hasOwner
+                            ? 'bg-green-500 text-neutral-50'
+                            : 'bg-neutral-50 text-neutral-900'
+                    )}
+                >
+                    {
+                        !data.hasOwner && (
+                            <div class="absolute -right-0 -top-1">
+                                <span class="flex h-3 w-3 relative">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
+                                </span>
+                            </div>
+                        )
+                    }
+                    {
+                        data.hasOwner ? (
+                            'Glücklich vergeben'
+                        ) : (
+                            <a href="#contact">Suche Herrchen!</a>
+                        )
+                    }
+                </div>
+            </div>
+            <p class="opacity-60 mb-1">
+                Spitzname: {data.nickNames.join(', ')}
+            </p>
+            <Content />
+        </div>
+        {/* @ts-ignore */}
+        <Image
+            width={160}
+            aspectRatio={1}
+            src={`/images/dogs/${slug}.png`}
+            alt=""
+            class={clsx(
+                'rounded-full border-2',
+                data.isFemale ? 'border-fuchsia-900' : 'border-blue-900'
+            )}
+        />
+    </div>
+</article>

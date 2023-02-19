@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { Icon } from 'astro-icon'
+import { clsx } from '../services/classname.service'
+
+interface Props {
+    solution: CollectionEntry<'solutions'>
+}
+const { solution } = Astro.props
+const { data, render } = solution
+const { Content } = await render()
+---
+
+<div
+    class="fade-in rounded-2xl border border-green-400 bg-green-50 text-green-900 p-4"
+>
+    <div class="flex gap-4 items-center mb-2">
+        <Icon name={data.icon} class="w-16 text-green-500" />
+        <h3>{data.heading}</h3>
+    </div>
+    <Content />
+</div>
