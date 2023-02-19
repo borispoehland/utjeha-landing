@@ -6,8 +6,8 @@ import ContentSection from '../components/ContentSection.astro'
 import SingleProblem from '../components/SingleProblem.astro'
 import { clsx } from '../services/classname.service'
 import SingleSolution from '../components/SingleSolution.astro'
-import { Image } from '@astrojs/image/components'
 import Icon from 'astro-icon'
+import { Image } from '@astrojs/image/components'
 
 const dogs = (await getCollection('dogs')).sort((a, b) => {
     return +a.data.hasOwner - +b.data.hasOwner
@@ -23,7 +23,7 @@ const solutions = await getCollection('solutions')
     description="In Utjeha gibt es viele herrenlose Hunde, auf die diese Seite aufmerksam machen möchte."
 >
     <main
-        class="py-44 bg-[linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)),url(/images/hero.png)] bg-cover bg-center"
+        class="py-44 bg-[linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)),url(/images/hero-min.png)] bg-cover bg-center"
     >
         <div class="contained space-y-3 text-neutral-50">
             <h1>Willkommen in Utjeha!</h1>
