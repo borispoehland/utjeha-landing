@@ -1,6 +1,6 @@
 ---
 name: "Lisa"
-nickNames: ["Lisi", "Grunzerle"]
+nickNames: ["Roxy", "Lisi"]
 isFemale: true
 hasOwner: false
 ---

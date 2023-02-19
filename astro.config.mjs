@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind'
 import image from '@astrojs/image'
 
 export default defineConfig({
-    site: 'https:/utjeha-landing.vercel.app/',
+    site: 'https://hunde.utjeha.me/',
     integrations: [
         tailwind(),
         image({
