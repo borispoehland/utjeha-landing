@@ -1,5 +1,7 @@
 ---
 import '@fontsource/nunito'
+import i18next, { t } from 'i18next'
+import { Trans, HeadHrefLangs } from 'astro-i18next/components'
 
 export interface Props {
     title: string
@@ -12,7 +14,7 @@ const image = new URL('/images/social.png', site)
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={i18next.language}>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
@@ -25,6 +27,7 @@ const image = new URL('/images/social.png', site)
         <meta property="og:image" content={image} />
         <meta property="og:url" content={site} />
         <meta name="twitter:card" content="summary_large_image" />
+        <HeadHrefLangs />
 
         <link
             rel="apple-touch-icon"
@@ -50,37 +53,37 @@ const image = new URL('/images/social.png', site)
     </head>
     <body>
         <slot />
+        <style is:global>
+            @tailwind base;
+            @tailwind components;
+            @layer base {
+                html {
+                    @apply bg-neutral-50 scroll-smooth;
+                }
+                a {
+                    @apply text-purple-700 font-bold;
+                }
+                h1 {
+                    @apply text-4xl sm:text-5xl font-bold;
+                }
+                h2 {
+                    @apply text-3xl sm:text-4xl font-bold;
+                }
+                h3 {
+                    @apply text-2xl sm:text-3xl font-bold;
+                }
+            }
+            @layer components {
+                .btn {
+                    @apply inline-block px-4 py-2 bg-primary-500 hover:bg-primary-600 duration-300 rounded-2xl text-neutral-50 text-lg font-normal;
+                }
+                .contained {
+                    @apply container mx-auto px-4;
+                }
+                .fade-in {
+                    @apply opacity-50 translate-y-1/2;
+                }
+            }
+        </style>
     </body>
 </html>
-<style is:global>
-    @tailwind base;
-    @tailwind components;
-    @layer base {
-        html {
-            @apply bg-neutral-50 scroll-smooth;
-        }
-        a {
-            @apply text-purple-700 font-bold;
-        }
-        h1 {
-            @apply text-4xl sm:text-5xl font-bold;
-        }
-        h2 {
-            @apply text-3xl sm:text-4xl font-bold;
-        }
-        h3 {
-            @apply text-2xl sm:text-3xl font-bold;
-        }
-    }
-    @layer components {
-        .btn {
-            @apply inline-block px-4 py-2 bg-primary-500 hover:bg-primary-600 duration-300 rounded-2xl text-neutral-50 text-lg font-normal;
-        }
-        .contained {
-            @apply container mx-auto px-4;
-        }
-        .fade-in {
-            @apply opacity-50 translate-y-1/2;
-        }
-    }
-</style>

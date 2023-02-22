@@ -5,6 +5,7 @@ const dogCollection = defineCollection({
         name: z.string(),
         nickNames: z.array(z.string()),
         isFemale: z.boolean(),
+        isCaged: z.boolean().default(false),
         hasOwner: z.boolean().default(false),
     }),
 })

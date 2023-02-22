@@ -1,16 +1,16 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import Layout from '../../layouts/Layout.astro'
 import { getCollection } from 'astro:content'
-import SingleDog from '../components/SingleDog.astro'
-import ContentSection from '../components/ContentSection.astro'
-import SingleProblem from '../components/SingleProblem.astro'
-import { clsx } from '../services/classname.service'
-import SingleSolution from '../components/SingleSolution.astro'
+import SingleDog from '../../components/SingleDog.astro'
+import ContentSection from '../../components/ContentSection.astro'
+import SingleProblem from '../../components/SingleProblem.astro'
+import { clsx } from '../../services/classname.service'
+import SingleSolution from '../../components/SingleSolution.astro'
 import { Image } from '@astrojs/image/components'
 import Icon from 'astro-icon'
 import i18next, { t, changeLanguage } from 'i18next'
 
-changeLanguage('de')
+changeLanguage('en')
 
 const language = i18next.language
 function languagePredicate({ slug }: { slug: string }) {

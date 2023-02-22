@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content'
 import { clsx } from '../services/classname.service'
 import { Image } from '@astrojs/image/components'
+import { t } from 'i18next'
 
 interface Props {
     dog: CollectionEntry<'dogs'>
@@ -39,23 +40,37 @@ const { Content } = await render()
                         !data.hasOwner && (
                             <div class="absolute -right-0 -top-1">
                                 <span class="flex h-3 w-3 relative">
-                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
+                                    <span
+                                        class={clsx(
+                                            'animate-ping absolute inline-flex h-full w-full rounded-full opacity-75',
+                                            data.isCaged
+                                                ? 'bg-red-400'
+                                                : 'bg-green-400'
+                                        )}
+                                    />
+                                    <span
+                                        class={clsx(
+                                            'relative inline-flex rounded-full h-3 w-3',
+                                            data.isCaged
+                                                ? 'bg-red-500'
+                                                : 'bg-green-500'
+                                        )}
+                                    />
                                 </span>
                             </div>
                         )
                     }
                     {
                         data.hasOwner ? (
-                            'Glücklich vergeben'
+                            t('dogs.texts.hasOwner')
                         ) : (
-                            <a href="#contact">Suche Herrchen!</a>
+                            <a href="#contact">{t('dogs.texts.needsOwner')}!</a>
                         )
                     }
                 </div>
             </div>
             <p class="opacity-60 mb-1">
-                Spitzname: {data.nickNames.join(', ')}
+                {t('dogs.texts.nickName')}: {data.nickNames.join(', ')}
             </p>
             <Content />
         </div>
@@ -63,7 +78,9 @@ const { Content } = await render()
         <Image
             width={160}
             aspectRatio={1}
-            src={`/images/dogs/${slug}.png?v=2`}
+            src={`/images/dogs/${slug.split('/')[1]}${
+                data.isCaged ? '_caged' : ''
+            }.png?v=2`}
             alt=""
             class={clsx(
                 'rounded-full border-2',

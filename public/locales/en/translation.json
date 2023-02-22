@@ -1,0 +1,36 @@
+{
+    "site": {
+        "title": "Dogs in Utjeha",
+        "description": "Utjeha has a lot of stray dogs that this site wants to shine a light on."
+    },
+    "hero": {
+        "heading": "Welcome to Utjeha!",
+        "catchphrase": "Here a lot of stray dogs that this site wants to shine a light on.",
+        "cta": "Get to know us"
+    },
+    "dogs": {
+        "heading": "This is us",
+        "intro": "We love humans, food and affection",
+        "texts": {
+            "needsOwner": "Searching owner",
+            "hasOwner": "Happily taken",
+            "nickName": "Nicknames"
+        }
+    },
+    "problem": {
+        "heading": "We are in danger",
+        "intro": "We are afraid of dog catchers in Montenegro. Here's the problem:"
+    },
+    "solution": {
+        "heading": "Here's how you can help",
+        "intro": "Thank you for helping us stay alive"
+    },
+    "contact": {
+        "heading": "Got questions?",
+        "intro": "Contact us anytime!",
+        "cta": {
+            "general": "General question",
+            "adopt": "I want to adopt a dog"
+        }
+    }
+}

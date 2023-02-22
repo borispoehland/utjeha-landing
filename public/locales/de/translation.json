@@ -1,0 +1,36 @@
+{
+    "site": {
+        "title": "Hunde in Utjeha",
+        "description": "In Utjeha gibt es viele herrenlose Hunde, auf die diese Seite aufmerksam machen möchte."
+    },
+    "hero": {
+        "heading": "Willkommen in Utjeha!",
+        "catchphrase": "Hier gibt es viele herrenlose Hunde, auf die diese Seite aufmerksam machen möchte.",
+        "cta": "Lerne uns kennen"
+    },
+    "dogs": {
+        "heading": "Das sind wir",
+        "intro": "Wir lieben Menschen, Futter und Zuneigung",
+        "texts": {
+            "needsOwner": "Suche Herrchen",
+            "hasOwner": "Glücklich vergeben",
+            "nickName": "Spitznamen"
+        }
+    },
+    "problem": {
+        "heading": "Wir sind in Gefahr",
+        "intro": "Wir haben große Angst vor den Tierfängern hier in Montenegro. Hier ist das Problem:"
+    },
+    "solution": {
+        "heading": "So kannst du helfen",
+        "intro": "Danke, dass du uns dabei hilfst, am Leben zu bleiben"
+    },
+    "contact": {
+        "heading": "Noch Fragen?",
+        "intro": "Du kannst jederzeit mit uns Kontakt aufnehmen!",
+        "cta": {
+            "general": "Allgemeine Frage",
+            "adopt": "Ich möchte einen Hund adoptieren"
+        }
+    }
+}
